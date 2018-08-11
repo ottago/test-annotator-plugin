@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  *
  */
-package hudson.plugins.junitattachments;
+package hudson.plugins.junitannotator;
 
 import hudson.FilePath;
 import hudson.model.Result;
@@ -43,11 +43,11 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
-import static hudson.plugins.junitattachments.AttachmentPublisherTest.getClassResult;
+import static hudson.plugins.junitannotator.TestAnnotatorTest.getClassResult;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class AttachmentPublisherPipelineTest {
+public class TestAnnotatorPipelineTest {
     // Package name used in tests in workspace2.zip
     private static final String TEST_PACKAGE = "com.example.test";
 
@@ -60,7 +60,7 @@ public class AttachmentPublisherPipelineTest {
 
         ClassResult cr = getClassResult(action, "test.foo.bar", "DefaultIntegrationTest");
 
-        AttachmentTestAction ata = cr.getTestAction(AttachmentTestAction.class);
+        AnnotatorTestAction ata = cr.getTestAction(AnnotatorTestAction.class);
         assertNotNull(ata);
 
         final List<String> attachments = ata.getAttachments();
@@ -85,7 +85,7 @@ public class AttachmentPublisherPipelineTest {
         assertNotNull(failingCase);
         assertEquals("Timed out after 10 seconds", failingCase.annotate(failingCase.getErrorDetails()));
 
-        AttachmentTestAction ata = failingCase.getTestAction(AttachmentTestAction.class);
+        AnnotatorTestAction ata = failingCase.getTestAction(AnnotatorTestAction.class);
         assertNotNull(ata);
 
         final List<String> attachments = ata.getAttachments();

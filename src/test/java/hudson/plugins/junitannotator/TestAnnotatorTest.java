@@ -1,4 +1,4 @@
-package hudson.plugins.junitattachments;
+package hudson.plugins.junitannotator;
 
 import org.jvnet.hudson.test.ExtractResourceSCM;
 import org.jvnet.hudson.test.HudsonTestCase;
@@ -26,7 +26,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-public class AttachmentPublisherTest extends HudsonTestCase {
+public class TestAnnotatorTest extends HudsonTestCase {
 
     // Package name used in tests in workspace2.zip
     private static final String TEST_PACKAGE = "com.example.test";
@@ -36,7 +36,7 @@ public class AttachmentPublisherTest extends HudsonTestCase {
 
         ClassResult cr = getClassResult(action, "test.foo.bar", "DefaultIntegrationTest");
 
-        AttachmentTestAction ata = cr.getTestAction(AttachmentTestAction.class);
+        AnnotatorTestAction ata = cr.getTestAction(AnnotatorTestAction.class);
         assertNotNull(ata);
 
         final List<String> attachments = ata.getAttachments();
@@ -53,7 +53,7 @@ public class AttachmentPublisherTest extends HudsonTestCase {
 
         // At the package level, attachments shouldn't be shown
         PackageResult pr = action.getResult().byPackage(TEST_PACKAGE);
-        AttachmentTestAction ata = pr.getTestAction(AttachmentTestAction.class);
+        AnnotatorTestAction ata = pr.getTestAction(AnnotatorTestAction.class);
         assertNull(ata);
     }
 
@@ -177,7 +177,7 @@ public class AttachmentPublisherTest extends HudsonTestCase {
 
     // Asserts that, for the given TestResult, the given attachments exist
     static void assertAttachmentsExist(TestResult result, String[] expectedFiles) {
-        AttachmentTestAction ata = result.getTestAction(AttachmentTestAction.class);
+        AnnotatorTestAction ata = result.getTestAction(AnnotatorTestAction.class);
         if (expectedFiles == null) {
             assertNull(ata);
             return;
@@ -209,7 +209,7 @@ public class AttachmentPublisherTest extends HudsonTestCase {
 
         DescribableList<TestDataPublisher, Descriptor<TestDataPublisher>> publishers =
                 new DescribableList<TestDataPublisher, Descriptor<TestDataPublisher>>(project);
-        publishers.add(new AttachmentPublisher());
+        publishers.add(new TestAnnotator());
 
         project.setScm(new ExtractResourceSCM(getClass().getResource(workspaceZip)));
         project.getBuildersList().add(new TouchBuilder());

@@ -23,6 +23,6 @@
  *
  */
 node {
-    step([$class: 'JUnitResultArchiver', testResults: "*.xml", testDataPublishers: [[$class: 'AttachmentPublisher']]])
+    step([$class: 'JUnitResultArchiver', testResults: "*.xml", testDataPublishers: [[$class: 'TestAnnotator']]])
 }
 

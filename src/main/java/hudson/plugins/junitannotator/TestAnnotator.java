@@ -1,4 +1,4 @@
-package hudson.plugins.junitattachments;
+package hudson.plugins.junitannotator;
 
 import hudson.model.Run;
 import hudson.model.TaskListener;
@@ -27,10 +27,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class AttachmentPublisher extends TestDataPublisher {
+public class TestAnnotator extends TestDataPublisher {
 
     @DataBoundConstructor
-    public AttachmentPublisher() {
+    public TestAnnotator() {
     }
 
     public static FilePath getAttachmentPath(Run<?, ?> build) {
@@ -134,7 +134,7 @@ public class AttachmentPublisher extends TestDataPublisher {
 
             // Return a single TestAction which will display the attached files
             FilePath root = getAttachmentPath(testObject.getRun());
-            AttachmentTestAction action = new AttachmentTestAction(testObject,
+            AnnotatorTestAction action = new AnnotatorTestAction(testObject,
                     getAttachmentPath(root, fullName), attachmentPaths);
             return Collections.<TestAction> singletonList(action);
         }

@@ -8,11 +8,11 @@
         <relativePath />
     </parent>
 
-    <artifactId>junit-attachments</artifactId>
-    <version>1.6-SNAPSHOT</version>
+    <artifactId>junit-annotator</artifactId>
+    <version>0.9-SNAPSHOT</version>
     <packaging>hpi</packaging>
-    <name>JUnit Attachments Plugin</name>
-    <url>https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Attachments+Plugin</url>
+    <name>JUnit Annotator Plugin</name>
+    <url>https://wiki.jenkins-ci.org/display/JENKINS/JUnit+Annotator+Plugin</url>
     <issueManagement>
         <system>JIRA</system>
         <url>https://issues.jenkins-ci.org/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=project+%3D+JENKINS+AND+status+in+%28Open%2C+"In+Progress"%2C+Reopened%29+AND+component+%3D+${project.artifactId}</url>
@@ -35,14 +35,10 @@
 
     <developers>
         <developer>
-            <id>huybrechts</id>
-            <name>Tom Huybrechts</name>
-        </developer>
-        <developer>
-            <id>orrc</id>
-            <name>Christopher Orr</name>
-            <email>chris@orr.me.uk</email>
-            <timezone>1</timezone>
+            <id>???</id>
+            <name>Nicholas Klopfer-Webber</name>
+            <email>???</email>
+            <timezone>10</timezone>
         </developer>
     </developers>
 

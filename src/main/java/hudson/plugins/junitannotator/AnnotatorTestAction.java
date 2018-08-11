@@ -1,4 +1,4 @@
-package hudson.plugins.junitattachments;
+package hudson.plugins.junitannotator;
 
 import hudson.FilePath;
 import hudson.model.DirectoryBrowserSupport;
@@ -10,20 +10,20 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
-public class AttachmentTestAction extends TestAction {
+public class AnnotatorTestAction extends TestAction {
 
 	private final FilePath storage;
 	private final List<String> attachments;
 	private final TestObject testObject;
 
-	public AttachmentTestAction(TestObject testObject, FilePath storage, List<String> attachments) {
+	public AnnotatorTestAction(TestObject testObject, FilePath storage, List<String> attachments) {
 		this.storage = storage;
 		this.testObject = testObject;
 		this.attachments = attachments;
 	}
 
 	public String getDisplayName() {
-		return "Attachments";
+		return "Annotator";
 	}
 
 	public String getIconFileName() {
@@ -31,18 +31,18 @@ public class AttachmentTestAction extends TestAction {
 	}
 
 	public String getUrlName() {
-		return "attachments";
+		return "annotator";
 	}
 
 	public DirectoryBrowserSupport doDynamic() {
-		return new DirectoryBrowserSupport(this, storage, "Attachments", "package.gif", true);
+		return new DirectoryBrowserSupport(this, storage, "Annotator", "package.gif", true);
 	}
 
 	@Override
 	public String annotate(String text) {
 		String url = Jenkins.getActiveInstance().getRootUrl()
 				+ testObject.getRun().getUrl() + "testReport"
-				+ testObject.getUrl() + "/attachments/";
+				+ testObject.getUrl() + "/annotator/";
 		for (String attachment : attachments) {
 			text = text.replace(attachment, "<a href=\"" + url + attachment
 					+ "\">" + attachment + "</a>");
@@ -63,7 +63,7 @@ public class AttachmentTestAction extends TestAction {
 	}
 
 	public static String getUrl(String filename) throws UnsupportedEncodingException {
-		return "attachments/" + URLEncoder.encode(filename, "UTF-8");
+		return "annotator/" + URLEncoder.encode(filename, "UTF-8");
 	}
 
 }

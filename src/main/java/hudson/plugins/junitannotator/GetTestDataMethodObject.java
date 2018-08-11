@@ -2,7 +2,7 @@
  * Copyright 2010-2011 Mirko Friedenhagen, Kohsuke Kawaguchi
  */
 
-package hudson.plugins.junitattachments;
+package hudson.plugins.junitannotator;
 
 import hudson.FilePath;
 import hudson.Launcher;
@@ -69,7 +69,7 @@ public class GetTestDataMethodObject {
         this.build = build;
         this.testResult = testResult;
         this.listener = listener;
-        attachmentsStorage = AttachmentPublisher.getAttachmentPath(build);
+        attachmentsStorage = TestAnnotator.getAttachmentPath(build);
         workspace = build.getWorkspace();
     }
 
@@ -85,7 +85,7 @@ public class GetTestDataMethodObject {
         this.build = build;
         this.testResult = testResult;
         this.listener = listener;
-        attachmentsStorage = AttachmentPublisher.getAttachmentPath(build);
+        attachmentsStorage = TestAnnotator.getAttachmentPath(build);
         this.workspace = workspace;
     }
 
@@ -106,7 +106,7 @@ public class GetTestDataMethodObject {
         for (Map.Entry<String, String> report : reports.entrySet()) {
             final String className = report.getKey();
             final FilePath reportFile = workspace.child(report.getValue());
-            final FilePath target = AttachmentPublisher.getAttachmentPath(attachmentsStorage, className);
+            final FilePath target = TestAnnotator.getAttachmentPath(attachmentsStorage, className);
             attachFilesForReport(className, reportFile, target);
             attachStdInAndOut(className, reportFile);
         }
@@ -241,7 +241,7 @@ public class GetTestDataMethodObject {
         boolean fileAlreadyCopied = containsFilename(tests, filename);
         if (!fileAlreadyCopied) {
             // Only need to copy the file if it hasn't already been handled for this test class
-            FilePath target = AttachmentPublisher.getAttachmentPath(attachmentsStorage, className);
+            FilePath target = TestAnnotator.getAttachmentPath(attachmentsStorage, className);
             target.mkdirs();
             FilePath dst = new FilePath(target, filename);
             src.copyTo(dst);
